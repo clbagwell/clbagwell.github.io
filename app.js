@@ -55,7 +55,6 @@ class App{
         this.renderer.setSize( window.innerWidth, window.innerHeight ); 
     }
     
-	}
 	render( ) {   
 		this.mesh.rotateY( 0.01 );
 		this.mesh2.rotateY( 0.01 );
