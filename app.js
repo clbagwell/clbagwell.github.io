@@ -7,7 +7,7 @@ class App{
 		document.body.appendChild( container );
     
 		// Add basic WebGL components: Camers, Scene, Renderer
-		this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
+		this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		this.camera.position.set( 0, 0, 4 );
         
 		this.scene = new THREE.Scene();
@@ -28,10 +28,19 @@ class App{
 
 		const geometry = new THREE.BoxBufferGeometry();
         const material = new THREE.MeshStandardMaterial( { color: 0xFF0000 });
+		const material2 = new THREE.MeshStandardMaterial( { color: 0x00FF00 });
+		const material3 = new THREE.MeshStandardMaterial( { color: 0x0000FF });
 
         this.mesh = new THREE.Mesh( geometry, material );
+		this.mesh2 = new THREE.Mesh( geometry, material2 );
+		this.mesh3 = new THREE.Mesh( geometry, material3 );
         
+		this.mesh2.position.x = -1.5;
+		this.mesh3.position.x = 1.5;
+
         this.scene.add(this.mesh);
+		this.scene.add(this.mesh2);
+		this.scene.add(this.mesh3);
         
         const controls = new OrbitControls( this.camera, this.renderer.domElement );
 
@@ -46,8 +55,11 @@ class App{
         this.renderer.setSize( window.innerWidth, window.innerHeight ); 
     }
     
+	}
 	render( ) {   
 		this.mesh.rotateY( 0.01 );
+		this.mesh2.rotateY( 0.01 );
+		this.mesh3.rotateY( 0.01 );
         this.renderer.render( this.scene, this.camera );
     }
 }
