@@ -19,6 +19,8 @@ class App{
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		container.appendChild( this.renderer.domElement );
 
+		const controls = new OrbitControls( this.camera, this.renderer.domElement );
+		
 		this.renderer.setAnimationLoop(this.render.bind(this));
 
         window.addEventListener('resize', this.resize.bind(this) );
