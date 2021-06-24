@@ -1,3 +1,5 @@
+import { OrbitControls } from '../../libs/three/jsm/OrbitControls.js';
+
 var APP = {
 
 	Player: function () {
@@ -18,8 +20,10 @@ var APP = {
 
 		this.dom = dom;
 
-		this.width = 500;
-		this.height = 500;
+		// this.width = 500;
+		// this.height = 500;
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
 
 		this.load = function ( json ) {
 
