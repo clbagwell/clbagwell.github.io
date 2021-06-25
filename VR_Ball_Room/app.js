@@ -4,6 +4,7 @@ import { XRControllerModelFactory } from '../libs/three/jsm/XRControllerModelFac
 import { BoxLineGeometry } from '../libs/three/jsm/BoxLineGeometry.js';
 import { Stats } from '../libs/stats.module.js';
 import { OrbitControls } from '../libs/three/jsm/OrbitControls.js';
+import { SpotLightVolumetricMaterial } from '../libs/SpotLightVolumetricMaterial.js';
 
 
 class App{
@@ -91,26 +92,45 @@ class App{
 
         const self = this;
         
-        this.controllers = this.buildControllers();
+        //this.controllers = this.buildControllers();
 
         function onSelectStart() {
-            this.children[0].scale.z = 10;
+            //this.children[0].scale.z = 10;
             this.userData.selectPressed = true;
+            if (self.spotlight) self.spotlight.visible = true;
         }
 
         function onSelectEnd() {
-            this.children[0].scale.z = 0;
+            //this.children[0].scale.z = 0;
             self.highlight.visible = false;
             this.userData.selectPressed = false;
+            if (self.spotlight) self.spotlight.visible = false;
         }
         
-        this.controllers.forEach( (controller) => {
-            controller.addEventListener( 'selectstart', onSelectStart );
-            controller.addEventListener( 'selectend', onSelectEnd );
-        });
+        //this.controllers.forEach( (controller) => {
+        //    controller.addEventListener( 'selectstart', onSelectStart );
+        //    controller.addEventListener( 'selectend', onSelectEnd );
+        //});
+        this.controller = this.renderer.xr.getController( 0 );
+        this.controller.addEventListener( 'selectstart', onSelectStart );
+        this.controller.addEventListener( 'selectend', onSelectEnd );
+        this.controller.addEventListener( 'connected', function ( event ) {
+
+            self.buildController.call(self, event.data, this );
+
+        } );
+        this.controller.addEventListener( 'disconnected', function () {
+
+            while(this.children.length>0) this.remove( this.children[ 0 ] );
+            self.controller = null;
+
+        } );
+        this.scene.add( this.controller );
+ 
+        this.scene.add(this.highlight);
     }
 
-    buildControllers(){
+    /*buildControllers(){
         const controllerModelFactory = new XRControllerModelFactory();
 
         const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
@@ -135,11 +155,63 @@ class App{
         }
         
         return controllers;
+    } */
+
+    buildController( data, controller ) {
+        let geometry, material, loader;
+        
+        const self = this;
+        
+        switch ( data.targetRayMode ) {
+            
+            case 'tracked-pointer':
+
+                loader = new GLTFLoader().setPath('../assets/');
+        
+                loader.load( 'flash-light.glb',
+                    ( gltf ) => {
+                        const flashLight = gltf.scene.children[2];
+                        const scale = 0.6;
+                        flashLight.scale.set(scale, scale, scale);
+                        controller.add( flashLight );
+                        self.spotlight = new THREE.Group();
+                        const spotlight = new THREE.SpotLight( 0xFFFFFF, 2, 12, Math.PI/15, 0.3 );
+                        geometry = new THREE.CylinderBufferGeometry(0.03, 1, 5, 32, 5, true);
+                        geometry.rotateX( Math.PI/2 );
+                        material = new SpotLightVolumetricMaterial();
+                        const cone = new THREE.Mesh( geometry, material );
+                        cone.translateZ( -2.6 );
+                    
+                        spotlight.position.set(0,0,0);
+                        spotlight.target.position.set(0,0,-1);
+                        self.spotlight.add( spotlight.target );
+                        self.spotlight.add( spotlight );
+                        self.spotlight.add( cone );
+                        
+                        controller.add(self.spotlight);
+                        self.spotlight.visible = false;
+                    },
+                    null,
+                    (error) =>  {
+                        console.error( 'An error occurred' );    
+                    }
+                );
+                
+                break;
+                
+            case 'gaze':
+
+                geometry = new THREE.RingBufferGeometry( 0.02, 0.04, 32 ).translate( 0, 0, - 1 );
+                material = new THREE.MeshBasicMaterial( { opacity: 0.5, transparent: true } );
+                controller.add( new THREE.Mesh( geometry, material ) )
+
+        }
+
     }
 
     handleController( controller ){
         if (controller.userData.selectPressed ){
-            controller.children[0].scale.z = 10;
+            //controller.children[0].scale.z = 10;
 
             this.workingMatrix.identity().extractRotation( controller.matrixWorld );
 
@@ -151,7 +223,7 @@ class App{
             if (intersects.length>0){
                 intersects[0].object.add(this.highlight);
                 this.highlight.visible = true;
-                controller.children[0].scale.z = intersects[0].distance;
+                //controller.children[0].scale.z = intersects[0].distance;
             }else{
                 this.highlight.visible = false;
             }
@@ -169,7 +241,7 @@ class App{
         
         if (this.controllers ){
             const self = this;
-            this.controllers.forEach( ( controller) => { 
+            this.controllers.forEach( ( controller ) => { 
                 self.handleController( controller ) 
             });
         }
