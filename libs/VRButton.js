@@ -27,7 +27,7 @@ class VRButton{
             document.body.appendChild( button );
             
 			// navigator.xr.isSessionSupported( this.sessionMode ).then( ( supported ) => {
-            navigator.xr.isSessionSupported( 'immersive-vrx' ).then( ( supported ) => {
+            navigator.xr.isSessionSupported( 'immersive-vr' ).then( ( supported ) => {
 
 				supported ? this.showEnterVR( button ) : this.showWebXRNotFound( button );
                 if (options && options.vrStatus) options.vrStatus( supported );
@@ -176,9 +176,6 @@ class VRButton{
         button.style.opacity = '1';
         button.style.fontSize = '13px';
         button.textContent = 'VR NOT SUPPORTED';
-        
-        
-
     }
 
     stylizeElement( element, active = true, fontSize = 13, ignorePadding = false ) {
@@ -197,8 +194,6 @@ class VRButton{
         element.style.zIndex = '999';
 
     }
-
-		
 
 };
 
