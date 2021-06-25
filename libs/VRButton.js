@@ -24,6 +24,7 @@ class VRButton{
 			const button = document.createElement( 'button' );
 			button.style.display = 'none';
             button.style.height = '40px';
+            document.body.appendChild( button );
             
 			navigator.xr.isSessionSupported( this.sessionMode ).then( ( supported ) => {
 
@@ -32,7 +33,7 @@ class VRButton{
                 
 			} );
             
-            document.body.appendChild( button );
+            // document.body.appendChild( button );
 
 		} else {
 
