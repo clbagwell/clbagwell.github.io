@@ -1,4 +1,4 @@
-import { OrbitControls } from '../../libs/three/jsm/OrbitControls.js';
+import { OrbitControls } from './OrbitControls.js';
 
 var APP = {
 
