@@ -1,0 +1,16 @@
+{
+"companyName": "Clayton Bagwell",
+"productName": "Reusable UI",
+"productVersion": "0.1",
+"dataUrl": "UI_Demo-WebGL.data.unityweb",
+"wasmCodeUrl": "UI_Demo-WebGL.wasm.code.unityweb",
+"wasmFrameworkUrl": "UI_Demo-WebGL.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.5f1"
+}
