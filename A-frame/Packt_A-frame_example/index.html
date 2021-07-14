@@ -7,10 +7,14 @@
     </head>
     <body>
         <a-scene>
+            <a-assets>
+                <img id="mydog" src="../assets/mydog.png" />
+            </a-assets>
             <a-box position="0 1.25 -3" rotation="45 45 45" 
                 width="0.75" height="0.75" depth="0.75"
                 scale="1 2.5 1"
-                src="../assets/mydog.png"></a-box>
+                src="#mydog"
+            </a-box>
             <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
             <a-sky color="#ECECEC"></a-sky>
         </a-scene>
