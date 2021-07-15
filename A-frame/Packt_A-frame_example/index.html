@@ -9,9 +9,9 @@
         <a-scene>
             <a-assets>
                 <img id="mydog" src="../assets/mydog.png" />
-                <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
-                <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-                <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+                <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg" crossorigin="anonymous">
+                <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg" crossorigin="anonymous">
+                <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg" crossorigin="anonymous">
             </a-assets>
 
             <a-box width="0.75" height="0.75" depth="0.75"
@@ -23,8 +23,8 @@
                 <a-animation attribute="rotation" beggin="click" repeat="indefinite" to="360 0 0"></a-animation>
             </a-box>
 
-            <a-camera position="0 7 5">
-                <a-cursor color="#ff0000" />
+            <a-camera position="0 7 -5">
+                <a-cursor color="#FF0000" />
             </a-camera>
 
             <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
