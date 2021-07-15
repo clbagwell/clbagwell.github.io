@@ -22,7 +22,7 @@
                     <!-- animation="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"> -->
                 <a-animation attribute="rotation" begin="click" repeat="indefinite" to="360 0 0"></a-animation>
 
-                <a-event name="mouseenter" scale="4 1 6"></a-event>
+                <!-- <a-event name="mouseenter" scale="4 1 6"></a-event> -->
             </a-box>
 
             <a-camera position="0 2 1">
@@ -34,5 +34,18 @@
             <a-sky color="#ECECEC"></a-sky>
             <!-- <a-sky src="#skyTexture"></a-sky> -->
         </a-scene>
+
+        <script>
+            var box = document.querySelector( 'a-box' );
+            box.addEventListener( "mouseenter", function( )
+            {
+                box.setAttribute( "scale", 
+                {
+                    x: 0.5,
+                    y: 2,
+                    z: 5.9
+                } );
+            } );            
+        </script>
     </body>
 </html>
