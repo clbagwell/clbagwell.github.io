@@ -9,17 +9,23 @@
         <a-scene>
             <a-assets>
                 <img id="mydog" src="../assets/mydog.png" />
+                <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+                <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+                <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
             </a-assets>
 
             <a-box width="0.75" height="0.75" depth="0.75"
                     position="0 1.25 -3" 
-                    rotation="0 60 0" 
+                    rotation="45 45 45" 
                     scale="1 2.5 1"
-                    src="#mydog">
-                <a-animation attribute="rotation" repeat="indefinite" to="360 0 0"></a-animation>
+                    src="#mydog"
+                    animation="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"></a-box>
+                <!-- <a-animation attribute="rotation" repeat="indefinite" to="360 0 0"></a-animation> -->
             </a-box>
-            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-            <a-sky color="#ECECEC"></a-sky>
+            <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+            <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane>
+            <!-- <a-sky color="#ECECEC"></a-sky> -->
+            <a-sky src="#skyTexture"></a-sky>
         </a-scene>
     </body>
 </html>
