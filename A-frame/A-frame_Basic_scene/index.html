@@ -6,11 +6,16 @@
   </head>
   <body>
     <a-scene>
-        <a-box src="https://i.imgur.com/mYmmbrp.jpg" position="0 2 -5" rotation="0 45 45" scale="2 2 2"></a-box>
+        <a-assets>
+            <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+            <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        </a-assets>
+
+        <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45" scale="2 2 2"></a-box>
             <!-- <a-sphere position="1 0 3"></a-sphere> -->
         
         <!-- Out of the box environment! -->
-        <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+        <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
 
         <a-sky color="#222"></a-sky>
     </a-scene>
