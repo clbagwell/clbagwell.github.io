@@ -21,7 +21,10 @@
         });
     </script>
 
-    <a-scene>
+    <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, 
+         threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris. -->
+    <!-- See more environment options: https://github.com/feiss/aframe-environment-component#parameters -->
+    <a-scene environment="preset: forest">
         <a-assets>
             <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg" crossorigin="anonymous">
             <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg" crossorigin="anonymous">
@@ -38,18 +41,18 @@
         <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
 
         <a-entity
-            text="value: Hello, A-Frame!; color: #BBB"
+            text="value: Hello, A-Frame!; color: #FAFAFA width: 5; anchor: align"
             position="-0.9 0.2 -3"
             scale="1.5 1.5 1.5">
         </a-entity>
 
         <a-camera>
-            <a-cursor></a-cursor>
+            <a-cursor color="#FAFAFA"></a-cursor>
         </a-camera>
 
         <!-- <a-sky color="#222"></a-sky> -->
-        <a-sky src="#skyTexture"></a-sky>
-        <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane>
+        <!-- <a-sky src="#skyTexture"></a-sky> -->
+        <!-- <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane> -->
 
         <a-light type="ambient" color="#445451"></a-light>
         <a-light type="point" intensity="2" position="2 4 4"></a-light>
